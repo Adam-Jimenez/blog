@@ -41,12 +41,13 @@ export default {
         background-position: center;
         background-repeat: no-repeat;
         .caption {
+            font-family: 'Lato', sans-serif;
             position: absolute;
             bottom: 0;
             width: 100%;
             min-height: $banner_height/5;
             background: rgba(0, 0, 0, 0.7);
-            color: rgba(255,255,255, 0.5);
+            color: rgba(255,255,255, 0.7);
             padding: 8px;
             text-align: right;
             h3, h4, h5, h6 {

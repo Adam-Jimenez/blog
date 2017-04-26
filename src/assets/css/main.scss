@@ -2,7 +2,10 @@
 // see: https://github.com/webpack-contrib/sass-loader/issues/40
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import '~font-awesome/css/font-awesome.min.css';
 @import 'variables';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 
 a, a:hover, a:active, a:visited, a:link {
     text-decoration: none;
@@ -15,4 +18,9 @@ a:hover {
 
 a.router-link-active {
     color: $color_warm;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
 }
