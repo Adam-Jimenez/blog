@@ -1,0 +1,19 @@
+// needed for bootstrap
+// see: https://github.com/webpack-contrib/sass-loader/issues/40
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+
+$color_black: #24292e;
+
+a, a:hover, a:active, a:visited, a:link {
+    text-decoration: none;
+    color: #a4a4a4;
+}
+
+a:hover {
+    color: darken(lime, 10%);
+}
+
+a.router-link-active {
+    color: $color_black;
+}
