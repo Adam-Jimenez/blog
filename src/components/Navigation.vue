@@ -92,6 +92,9 @@ export default {
                     transition: all .2s ease-in-out;
 				}
 			}
+            > li:last-child {
+                margin-right: 0;
+            }
 		}
     }
 </style>

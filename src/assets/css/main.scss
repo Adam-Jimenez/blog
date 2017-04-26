@@ -2,8 +2,7 @@
 // see: https://github.com/webpack-contrib/sass-loader/issues/40
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
-
-$color_black: #24292e;
+@import 'variables';
 
 a, a:hover, a:active, a:visited, a:link {
     text-decoration: none;
@@ -11,9 +10,9 @@ a, a:hover, a:active, a:visited, a:link {
 }
 
 a:hover {
-    color: darken(lime, 10%);
+    color: $color_warm;
 }
 
 a.router-link-active {
-    color: $color_black;
+    color: $color_warm;
 }
