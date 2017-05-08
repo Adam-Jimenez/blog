@@ -2,10 +2,10 @@
     <div class="banner">
         <div class="caption">
             <h4>
-                Generic sunset
+                Some quote very deep
             </h4>
             <p>
-                Nothing better as a banner than a generic sunset!
+                - Albert Einstein
             </p>
         </div>
     </div>
@@ -36,10 +36,8 @@ export default {
         position: relative;
         width: 100%;
         height: $banner_height;
-        background-color: $color_black;
-        background-image: url('~@/assets/img/sunset.jpg');
-        background-position: center;
-        background-repeat: no-repeat;
+        background: url('~@/assets/img/leaves.jpg') no-repeat top center fixed;
+        background-size: cover;
         .caption {
             font-family: 'Lato', sans-serif;
             position: absolute;

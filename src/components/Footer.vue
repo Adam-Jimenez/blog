@@ -1,7 +1,7 @@
 <template>
     <footer>
         <div class="container">
-            Made with <i class="fa fa-heart" /> by Adam Jimenez
+            Made with <i class="fa fa-heart" /> by Adam
         </div>
     </footer>
 </template>
