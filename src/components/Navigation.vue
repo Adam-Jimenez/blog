@@ -7,8 +7,12 @@
             <nav class="right">
 				<ul>
 					<li>
+                        <!-- exact make sure / isn't active with sub-links like /about -->
 						<router-link to="/" exact>Home</router-link>
 					</li>
+                    <li>
+                        <router-link to="/blog">Blog</router-link>
+                    </li>
 					<li>
 						<router-link to="/about">About</router-link>
 					</li>
@@ -45,12 +49,14 @@ export default {
     $nav_bg_color: white;
 
     .nav-main {
+        position: fixed;
+        top: 0;
+        width: 100%;
         padding-top: $nav_padding_top;
         padding-bottom: $nav_padding_bottom;
         background-color: $nav_bg_color;
         box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-        z-index: 10;
-        position: relative;
+        z-index: 100;
         line-height: 1.5em;
 
         .logo {

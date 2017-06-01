@@ -9,7 +9,7 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 
 a, a:hover, a:active, a:visited, a:link {
     text-decoration: none;
-    color: #a4a4a4;
+    color: $color_lightgray;
 }
 
 a:hover {

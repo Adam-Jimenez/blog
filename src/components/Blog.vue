@@ -1,15 +1,21 @@
 <template>
-    <div class="home">
-        <h2>Latest post</h2>
+    <div class="blog">
+        <h2>Blog</h2>
         <hr />
+        <post-preview />
+        <post-preview />
+        <post-preview />
+        <post-preview />
         <post-preview />
     </div>
 </template>
+
 <script>
+
 import PostPreview from '@/components/PostPreview'
 
 export default {
-    name: 'home',
+    name: 'blog',
     props: {
 
     },
@@ -24,5 +30,7 @@ export default {
     }
 }
 </script>
+
 <style lang="scss">
+
 </style>

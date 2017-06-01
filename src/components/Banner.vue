@@ -1,11 +1,11 @@
 <template>
     <div class="banner">
         <div class="caption">
-            <h4>
-                Some quote very deep
-            </h4>
+            <blockquote>
+				Before software can be reusable it first has to be usable.
+            </blockquote>
             <p>
-                - Albert Einstein
+				- Ralph Johnson
             </p>
         </div>
     </div>
@@ -31,7 +31,7 @@ export default {
 
 <style lang="scss">
     @import '../assets/css/variables';
-    $banner_height: 280px;
+    $banner_height: 350px;
     .banner {
         position: relative;
         width: 100%;
@@ -48,8 +48,23 @@ export default {
             color: rgba(255,255,255, 0.7);
             padding: 8px;
             text-align: right;
-            h3, h4, h5, h6 {
-            margin-bottom: 5px;
+            blockquote {
+                border: none;
+                display: inline-block;
+                padding: 0;
+                text-align: justify;
+                font-size: 100%;
+                margin-bottom: 5px;
+                max-width: 400px;
+            }
+            p {
+                margin-bottom: 4px;
+            }
+            blockquote:before {
+                content: "\"";
+            }
+            blockquote:after {
+                content: "\"";
             }
         }
     }
