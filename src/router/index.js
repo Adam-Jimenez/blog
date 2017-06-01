@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import Blog from '@/components/Blog'
 import About from '@/components/About'
 import NotFound from '@/components/NotFound'
+import Contact from '@/components/Contact'
 
 Vue.use(Router)
 
@@ -20,6 +21,10 @@ export default new Router({
         {
             path: '/about',
             component: About
+        },
+        {
+            path: '/contact',
+            component: Contact
         },
         {
             path: '*',
