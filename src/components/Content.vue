@@ -25,6 +25,8 @@ export default {
 <style lang="scss">
 
 $content_width: 767px;
+$content_link_color: #55a;
+$content_link_color_hover: #226;
 
 .content {
     padding-top: 70px;
@@ -36,5 +38,11 @@ $content_width: 767px;
 .content-container {
     margin: auto;
     max-width: $content_width;
+    a, a:hover, a:active, a:visited, a:link {
+        color: $content_link_color;
+    }
+    a:hover {
+        color: $content_link_color_hover;
+    }
 }
 </style>

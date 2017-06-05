@@ -3,7 +3,9 @@
         <navigation />
         <banner />
         <content-component>
-            <router-view></router-view>
+            <transition name="fade" mode="out-in">
+                <router-view></router-view>
+            </transition>
         </content-component>
         <footer-component />
     </div>
@@ -26,5 +28,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+    opacity: 0;
+}
 </style>

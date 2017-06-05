@@ -7,12 +7,15 @@
             My name is Adam Jimenez, and I am a software developer passionate about making the world a better place, one line of code at the time.
         </p>
         <p>
-            I've been interested in programming ever since my early teenage years, when I discovered that you could make games only by typing words in the correct order.
+            I've been interested in programming ever since my early teenage years when I discovered that you could make games only by typing words in the correct order.
             In fact, my first game is still available <a href="http://gamejolt.com/games/ultimate-adventurer/6861">here</a>.
         </p>
 		<p>
-			Since then, I've been exploring the possibilities of the programming world by working on a variety of projects.
+            Since then, I've been exploring the possibilities of the programming world by working on a variety of <router-link to="/projects">projects</router-link>.
 		</p>
+        <p>
+            I graduated from Cégep André-Laurendeau in Computer Science in May 2017.
+        </p>
 		<div class="links">
 			<a target="_blank" href="https://github.com/Adam-Jimenez">
 				<i class="fa fa-github" /> Github
@@ -66,6 +69,9 @@ export default {
 			color: #555;
 			margin-right: 10px;
 		}
+        a:hover {
+            color: black;
+        }
 	}
 }
 </style>

@@ -2,10 +2,8 @@
     <div class="banner">
         <div class="caption">
             <blockquote>
-				Before software can be reusable it first has to be usable.
             </blockquote>
             <p>
-				- Ralph Johnson
             </p>
         </div>
     </div>
@@ -59,12 +57,6 @@ export default {
             }
             p {
                 margin-bottom: 4px;
-            }
-            blockquote:before {
-                content: "\"";
-            }
-            blockquote:after {
-                content: "\"";
             }
         }
     }

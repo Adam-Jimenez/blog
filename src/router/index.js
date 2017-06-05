@@ -5,6 +5,8 @@ import Blog from '@/components/Blog'
 import About from '@/components/About'
 import NotFound from '@/components/NotFound'
 import Contact from '@/components/Contact'
+import Projects from '@/components/Projects'
+import Post from '@/components/Post'
 
 Vue.use(Router)
 
@@ -19,12 +21,21 @@ export default new Router({
             component: Blog
         },
         {
+            path: '/posts/:id',
+            component: Post,
+            props: true // passes route params as props to component
+        },
+        {
             path: '/about',
             component: About
         },
         {
             path: '/contact',
             component: Contact
+        },
+        {
+            path: '/projects',
+            component: Projects
         },
         {
             path: '*',
