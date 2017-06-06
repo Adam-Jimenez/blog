@@ -1,8 +1,6 @@
 <template>
     <footer>
-        <div class="container">
-            Made with <i class="fa fa-heart" /> by Adam
-        </div>
+        Made with <i class="fa fa-heart" /> by Adam
     </footer>
 </template>
 
@@ -28,6 +26,9 @@ export default {
     $footer-color: #A5A5A5;
 
     footer {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
         color: $footer-color;
         font-family: Lato, sans-serif;
         font-size: 15px;
