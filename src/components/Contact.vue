@@ -21,7 +21,7 @@ export default {
             customToolbar: [
                 ['bold', 'italic', 'underline'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                ['image', 'code-block']
+                ['image']
             ],
             loading: false
         }
@@ -35,7 +35,8 @@ export default {
             this.loading = true
             setTimeout(() => {
                 this.$notify.success({
-                    message: 'Message sent successfully!'
+                    message: 'Message sent successfully!',
+                    duration: 2000
                 })
                 this.loading = false
             }, 1000)
@@ -53,6 +54,7 @@ export default {
 <style lang="scss">
 .contact {
     .editor {
+        margin-top: 5px;
         margin-bottom: 5px;
     }
 }

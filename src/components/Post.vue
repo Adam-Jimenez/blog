@@ -1,33 +1,40 @@
 <template>
-    <div class="post">
-        <h2>{{ title }}</h2>
-        <hr />
-        <p>{{ content }}</p>
+    <div v-loading="!post" class="post">
+        <template v-if="post">
+            <h2>{{ post.title }}</h2>
+            <hr />
+            <p>{{ post.content }}</p>
+        </template>
     </div>
 </template>
 
 <script>
+
+import { mapActions } from 'vuex'
+
 export default {
     name: 'post',
     props: {
         id: {
             type: String,
             required: true
-        },
-        title: {
-            type: String,
-            default: 'Post title'
-        },
-        content: {
-            type: String,
-            default: 'Post content'
         }
     },
     methods: {
-
+        ...mapActions({
+            fetchPostById: 'fetchPostById'
+        })
     },
     computed: {
-
+        post () {
+            const post = this.$store.getters.getPostById(this.id)
+            return post
+        }
+    },
+    mounted () {
+        if (!this.post) {
+            this.fetchPostById(this.id)
+        }
     },
     components: {
 

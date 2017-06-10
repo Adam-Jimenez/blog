@@ -1,25 +1,22 @@
 <template>
-    <div class="blog">
+    <div v-loading="!fetchedAllPosts" class="blog">
         <h2>Blog</h2>
         <hr />
-        <template v-show="arePostsReady">
-            <transition-group name="fade" tag="div" class="post-container">
-                <post-preview v-for="post in posts"
-                    :key="post.id"
-                    :postId="post.id"
-                    :title="post.title"
-                    :content="post.content"
-                />
-            </transition-group>
-        </template>
+        <transition-group name="fade" tag="div" class="post-container">
+            <post-preview v-for="post in getOrderedPosts()"
+                :key="post.id"
+                :postId="post.id"
+                :title="post.title"
+                :content="post.content"
+            />
+        </transition-group>
     </div>
 </template>
 
 <script>
 
-import _ from 'lodash'
 import PostPreview from '@/components/PostPreview'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'blog',
@@ -29,21 +26,20 @@ export default {
     methods: {
         ...mapActions([
             'fetchAllPosts'
+        ]),
+        ...mapGetters([
+            'getOrderedPosts'
         ])
     },
     computed: {
         ...mapState({
-            posts: state => state.blog.posts
-        }),
-        arePostsReady () {
-            return !_.isEmpty(this.posts)
-        }
+            posts: state => state.blog.posts,
+            fetchedAllPosts: state => state.blog.fetchedAllPosts
+        })
     },
     mounted () {
-        if (!this.arePostsReady) {
-            setTimeout(() => {
-                this.fetchAllPosts()
-            }, 1000)
+        if (!this.fetchedAllPosts) {
+            this.fetchAllPosts()
         }
     },
     components: {

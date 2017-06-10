@@ -1,30 +1,67 @@
+import Vue from 'vue'
 import rest from '@/modules/rest'
-import promises from '@/constants/promises'
+import _ from 'lodash'
 
 export default {
     state: {
-        posts: [],
-        requestState: null
+        posts: {},
+        fetchedAllPosts: false // we only want to do it once to avoid spam
+    },
+    getters: {
+        getPostById: (state) => (id) => {
+            return state.posts[id]
+        },
+        /*
+         * Sorts by date
+         */
+        getOrderedPosts: (state) => {
+            if (_.isEmpty(state.posts)) {
+                return null
+            }
+            const postsArray = _.toArray(state.posts)
+            const sortedPosts = _.sortBy(postsArray, (post) => {
+                return new Date(post.created_at)
+            }).reverse()
+            return sortedPosts
+        },
+        getLatestPost: (state, getters) => {
+            if (_.isEmpty(state.posts)) {
+                return null
+            }
+            const sortedPosts = getters.getOrderedPosts
+            const latestPost = sortedPosts[0]
+            return latestPost
+        }
     },
     mutations: {
-        setPosts: function (state, posts) {
-            state.posts = posts
+        setPosts (state, posts) {
+            _.each(posts, (post) => {
+                Vue.set(state.posts, post.id, post)
+            })
+            state.fetchedAllPosts = true
         },
-        setRequestState (state, requestState) {
-            state.requestState = requestState
+        setPost (state, post) {
+            Vue.set(state.posts, post.id, post)
         }
     },
     actions: {
-        fetchAllPosts: function (context) {
-            context.commit('setRequestState', promises.PENDING)
-            rest.fetchAllPosts()
+        fetchAllPosts (context) {
+            return rest.fetchAllPosts()
             .then((posts) => {
                 context.commit('setPosts', posts)
-                context.commit('setRequestState', promises.FULFILLED)
             })
-            .catch((err) => {
-                context.commit('setRequestState', promises.REJECTED)
-                throw err
+        },
+        fetchPostById (context, id) {
+            return rest.fetchPostById(id)
+            .then((post) => {
+                context.commit('setPost', post)
+            })
+        },
+        fetchLatestPost (context) {
+            return rest.fetchLatestPost()
+            .then((post) => {
+                console.log(post)
+                context.commit('setPost', post)
             })
         }
     }
