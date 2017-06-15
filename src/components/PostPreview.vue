@@ -3,7 +3,7 @@
         <router-link :to="`/posts/${postId}`">
             <h3>{{ title }}</h3>
         </router-link>
-        <p>{{ trimmedContent }}</p>
+        <div class="content-preview" v-html="content"></div>
         <router-link :to="`/posts/${postId}`">Read more</router-link>
         <hr />
     </div>
@@ -27,12 +27,7 @@ export default {
         }
     },
     methods: {
-    },
-    computed: {
-        trimmedContent () {
-            const CHAR_LIMIT = 255
-            return this.content.substring(0, CHAR_LIMIT)
-        }
+
     },
     components: {
 
@@ -58,6 +53,10 @@ export default {
     }
     a {
         font-size: 80%;
+    }
+    .content-preview {
+        max-height: 200px;
+        overflow: hidden;
     }
 }
 </style>

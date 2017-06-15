@@ -60,7 +60,14 @@ export default {
         fetchLatestPost (context) {
             return rest.fetchLatestPost()
             .then((post) => {
-                console.log(post)
+                context.commit('setPost', post)
+            })
+        },
+        uploadPost (context, post) {
+            // TODO: authentification,
+            // or else we are vulnerable to XSS
+            return rest.uploadPost(post.title, post.content)
+            .then((post) => {
                 context.commit('setPost', post)
             })
         }

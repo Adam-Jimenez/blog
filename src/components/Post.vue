@@ -3,7 +3,7 @@
         <template v-if="post">
             <h2>{{ post.title }}</h2>
             <hr />
-            <p>{{ post.content }}</p>
+            <div v-html="post.content"></div>
         </template>
     </div>
 </template>

@@ -7,6 +7,7 @@ import NotFound from '@/components/NotFound'
 import Contact from '@/components/Contact'
 import Projects from '@/components/Projects'
 import Post from '@/components/Post'
+import Compose from '@/components/Compose'
 
 Vue.use(Router)
 
@@ -36,6 +37,10 @@ export default new Router({
         {
             path: '/projects',
             component: Projects
+        },
+        {
+            path: '/compose',
+            component: Compose
         },
         {
             path: '*',
