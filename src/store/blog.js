@@ -5,7 +5,8 @@ import _ from 'lodash'
 export default {
     state: {
         posts: {},
-        fetchedAllPosts: false // we only want to do it once to avoid spam
+        fetchedAllPosts: false, // we only want to do it once to avoid spam
+        fetchedLatestPost: false
     },
     getters: {
         getPostById: (state) => (id) => {
@@ -25,7 +26,7 @@ export default {
             return sortedPosts
         },
         getLatestPost: (state, getters) => {
-            if (_.isEmpty(state.posts)) {
+            if (!state.fetchedLatestPost) {
                 return null
             }
             const sortedPosts = getters.getOrderedPosts
@@ -38,7 +39,6 @@ export default {
             _.each(posts, (post) => {
                 Vue.set(state.posts, post.id, post)
             })
-            state.fetchedAllPosts = true
         },
         setPost (state, post) {
             Vue.set(state.posts, post.id, post)
@@ -49,6 +49,8 @@ export default {
             return rest.fetchAllPosts()
             .then((posts) => {
                 context.commit('setPosts', posts)
+                context.state.fetchedAllPosts = true
+                context.state.fetchedLatestPost = true // if we have all posts, we surely have the latest in the bunch
             })
         },
         fetchPostById (context, id) {
@@ -61,6 +63,7 @@ export default {
             return rest.fetchLatestPost()
             .then((post) => {
                 context.commit('setPost', post)
+                context.state.fetchedLatestPost = true
             })
         },
         uploadPost (context, post) {
