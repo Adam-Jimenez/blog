@@ -4,7 +4,7 @@
             <h3>{{ title }}</h3>
         </router-link>
         <div class="content-preview" v-html="content"></div>
-        <router-link :to="`/posts/${postId}`">Read more</router-link>
+        <router-link class="read-more" :to="`/posts/${postId}`">Read more</router-link>
         <hr />
     </div>
 </template>
@@ -40,7 +40,8 @@ export default {
 
 .post-preview {
     h3 {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
+        margin-top: 30px;
         color: #333;
     }
     h3:hover {
@@ -57,6 +58,10 @@ export default {
     .content-preview {
         max-height: 200px;
         overflow: hidden;
+    }
+    .read-more {
+        display: inline-block;
+        margin-top: 20px;
     }
 }
 </style>

@@ -72,6 +72,9 @@ export default {
             })
             Vue.set(state.pages, pageNumber, postIds)
             state.totalNumberOfPages = page.totalNumberOfPages
+        },
+        setCurrentPage (state, pageNumber) {
+            state.currentPage = pageNumber
         }
     },
     actions: {
