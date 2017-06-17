@@ -5,7 +5,15 @@ import _ from 'lodash'
 export default {
     state: {
         posts: {},
-        fetchedAllPosts: false, // we only want to do it once to avoid spam
+        /**
+         * {
+         *  <pagenumber> : [ids of posts...]
+         *  ...
+         * }
+         */
+        pages: {},
+        currentPage: 0,
+        totalNumberOfPages: null,
         fetchedLatestPost: false
     },
     getters: {
@@ -20,18 +28,31 @@ export default {
                 return null
             }
             const postsArray = _.toArray(state.posts)
-            const sortedPosts = _.sortBy(postsArray, (post) => {
-                return new Date(post.created_at)
-            }).reverse()
+            const sortedPosts = sortPostByDate(postsArray)
             return sortedPosts
         },
         getLatestPost: (state, getters) => {
             if (!state.fetchedLatestPost) {
                 return null
             }
+            // TODO: instead of sorting, just iterate and keep most recent
             const sortedPosts = getters.getOrderedPosts
             const latestPost = sortedPosts[0]
             return latestPost
+        },
+        getPostsByPageNumber: (state) => (pageNumber) => {
+            const postIdsForPage = state.pages[pageNumber]
+            if (!postIdsForPage) {
+                return null
+            }
+            const posts = _.map(postIdsForPage, (postId) => {
+                return state.posts[postId]
+            })
+            const sortedPosts = sortPostByDate(posts)
+            return sortedPosts
+        },
+        getPostsForCurrentPage: (state, getters) => {
+            return getters.getPostsByPageNumber(state.currentPage)
         }
     },
     mutations: {
@@ -42,15 +63,23 @@ export default {
         },
         setPost (state, post) {
             Vue.set(state.posts, post.id, post)
+        },
+        setPage (state, page) {
+            // page.page = page number and references array of post ids
+            const pageNumber = page.page
+            const postIds = _.map(page.data, (post) => {
+                return post.id
+            })
+            Vue.set(state.pages, pageNumber, postIds)
+            state.totalNumberOfPages = page.totalNumberOfPages
         }
     },
     actions: {
-        fetchAllPosts (context) {
-            return rest.fetchAllPosts()
-            .then((posts) => {
-                context.commit('setPosts', posts)
-                context.state.fetchedAllPosts = true
-                context.state.fetchedLatestPost = true // if we have all posts, we surely have the latest in the bunch
+        fetchPostsByPage (context, pageNumber) {
+            return rest.fetchPostsByPage(pageNumber)
+            .then((page) => {
+                context.commit('setPosts', page.data)
+                context.commit('setPage', page)
             })
         },
         fetchPostById (context, id) {
@@ -75,4 +104,11 @@ export default {
             })
         }
     }
+}
+
+function sortPostByDate (posts) {
+    const sortedPosts = _.sortBy(posts, (post) => {
+        return new Date(post.created_at)
+    }).reverse()
+    return sortedPosts
 }

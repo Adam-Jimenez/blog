@@ -1,9 +1,10 @@
 <template>
-    <div v-loading="!fetchedAllPosts" class="blog">
+    <!-- TODO fix for pagination -->
+    <div v-loading="!getPostsForCurrentPage" class="blog">
         <h2>Blog</h2>
         <hr />
         <transition-group name="fade" tag="div" class="post-container">
-            <post-preview v-for="post in getOrderedPosts()"
+            <post-preview v-for="post in getPostsForCurrentPage"
                 :key="post.id"
                 :postId="post.id"
                 :title="post.title"
@@ -25,21 +26,28 @@ export default {
     },
     methods: {
         ...mapActions([
-            'fetchAllPosts'
-        ]),
-        ...mapGetters([
-            'getOrderedPosts'
+            'fetchPostsByPage'
         ])
     },
     computed: {
         ...mapState({
-            posts: state => state.blog.posts,
-            fetchedAllPosts: state => state.blog.fetchedAllPosts
-        })
+            currentPage: state => state.blog.currentPage,
+            totalNumberOfPages: state => state.blog.totalNumberOfPages
+        }),
+        ...mapGetters([
+            'getPostsForCurrentPage'
+        ])
+    },
+    watch: {
+        currentPage (value) {
+            if (!this.getPostsForCurrentPage) {
+                this.fetchPostsByPage(this.currentPage)
+            }
+        }
     },
     mounted () {
-        if (!this.fetchedAllPosts) {
-            this.fetchAllPosts()
+        if (!this.getPostsForCurrentPage) {
+            this.fetchPostsByPage(this.currentPage)
         }
     },
     components: {

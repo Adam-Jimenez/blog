@@ -6,8 +6,8 @@ const rest = axios.create({
 })
 
 export default {
-    fetchAllPosts: () => {
-        return rest.get('/posts')
+    fetchPostsByPage: (pageNumber) => {
+        return rest.get(`/posts?page=${pageNumber}`)
         .then((res) => {
             return res.data
         })

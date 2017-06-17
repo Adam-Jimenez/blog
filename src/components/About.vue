@@ -8,7 +8,7 @@
         </p>
         <p>
             I've been interested in programming ever since my early teenage years when I discovered that you could make games only by typing words in the correct order.
-            In fact, my first game is still available <a href="http://gamejolt.com/games/ultimate-adventurer/6861">here</a>.
+            In fact, my first game is still available <a target="_blank" href="http://gamejolt.com/games/ultimate-adventurer/6861">here</a>.
         </p>
 		<p>
             Since then, I've been exploring the possibilities of the programming world by working on a variety of <router-link to="/projects">projects</router-link>.
