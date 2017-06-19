@@ -24,10 +24,11 @@ export default {
             return res.data
         })
     },
-    uploadPost: (postTitle, postContent) => {
+    uploadPost: (postTitle, postContent, password) => {
         return rest.post('/posts', {
             title: postTitle,
-            content: postContent
+            content: postContent,
+            password: password
         })
         .then((res) => {
             return res.data

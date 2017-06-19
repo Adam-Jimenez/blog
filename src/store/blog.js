@@ -99,9 +99,7 @@ export default {
             })
         },
         uploadPost (context, post) {
-            // TODO: authentification,
-            // or else we are vulnerable to XSS
-            return rest.uploadPost(post.title, post.content)
+            return rest.uploadPost(post.title, post.content, post.password)
             .then((post) => {
                 context.commit('setPost', post)
             })

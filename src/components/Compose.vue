@@ -4,7 +4,8 @@
         <hr />
         <el-input placeholder="Post Title" v-model="title" />
         <vue-editor class="editor" v-model="content" :editorToolbar="customToolbar"/>
-        <el-button @click="onClick">Post</el-button>
+        <el-input type="password" class="password" placeholder="Password" v-model="password" />
+        <el-button class="postButton" @click="onClick">Post</el-button>
         </div>
     </template>
 
@@ -19,6 +20,7 @@ export default {
         return {
             title: '',
             content: '',
+            password: '',
             loading: false,
             customToolbar: [
                 ['bold', 'italic', 'underline'],
@@ -38,7 +40,8 @@ export default {
             this.loading = true
             this.uploadPost({
                 title: this.title,
-                content: this.content
+                content: this.content,
+                password: this.password
             })
             .then(() => {
                 this.$notify.success({
@@ -58,5 +61,12 @@ export default {
 </script>
 
 <style lang="scss">
-
+.compose {
+    .password {
+        max-width: 200px;
+    }
+    .postButton {
+        float: right;
+    }
+}
 </style>
