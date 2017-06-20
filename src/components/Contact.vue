@@ -2,9 +2,6 @@
     <div v-loading="loading" class="contact">
         <h2>Contact</h2>
         <hr />
-        <p>
-            You can send me a message using the text box below. The message will be sent to my personal inbox.
-        </p>
         <vue-editor class="editor" v-model="content" :editorToolbar="customToolbar"/>
         <el-button @click="onClick">Send message</el-button>
     </div>

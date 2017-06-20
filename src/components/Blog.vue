@@ -1,15 +1,16 @@
 <template>
-    <!-- TODO fix for pagination -->
     <div v-loading="!getPostsForCurrentPage" class="blog">
         <h2>Blog</h2>
         <hr />
-        <post-preview v-for="post in getPostsForCurrentPage"
-            :key="post.id"
-            :postId="post.id"
-            :title="post.title"
-            :content="post.content"
-        />
-        <div v-if="totalNumberOfPages">
+        <transition-group tag="div" name="scroll" >
+            <post-preview v-for="post in getPostsForCurrentPage"
+                :key="post.id"
+                :postId="post.id"
+                :title="post.title"
+                :content="post.content"
+            />
+        </transition-group>
+        <div class="pagination-section" v-if="totalNumberOfPages">
             <el-pagination
                 layout="prev, pager, next"
                 :current-page="currentPage + 1"
@@ -75,4 +76,17 @@ export default {
 </script>
 
 <style lang="scss">
+.pagination-section {
+    text-align: center;
+}
+.scroll-enter-active {
+    transition: all 1s;
+}
+.scroll-leave-active {
+    display: none;
+}
+.scroll-enter {
+    opacity: 0;
+}
+
 </style>
