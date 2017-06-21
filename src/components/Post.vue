@@ -21,13 +21,13 @@ export default {
         }
     },
     methods: {
-        ...mapActions({
+        ...mapActions('blog', {
             fetchPostById: 'fetchPostById'
         })
     },
     computed: {
         post () {
-            const post = this.$store.getters.getPostById(this.id)
+            const post = this.$store.getters['blog/getPostById'](this.id)
             return post
         }
     },

@@ -3,6 +3,7 @@ import rest from '@/modules/rest'
 import _ from 'lodash'
 
 export default {
+    namespaced: true,
     state: {
         posts: {},
         /**

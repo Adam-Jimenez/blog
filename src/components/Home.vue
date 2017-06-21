@@ -19,10 +19,10 @@ export default {
 
     },
     methods: {
-        ...mapActions([
+        ...mapActions('blog', [
             'fetchLatestPost'
         ]),
-        ...mapGetters([
+        ...mapGetters('blog', [
             'getLatestPost'
         ])
     },

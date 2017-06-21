@@ -33,12 +33,12 @@ export default {
 
     },
     methods: {
-        ...mapActions([
+        ...mapActions('blog', [
             'fetchPostsByPage'
         ]),
         onPageChange (targetPage) {
             // -1 because state is zero-indexed
-            this.$store.commit('setCurrentPage', targetPage - 1)
+            this.$store.commit('blog/setCurrentPage', targetPage - 1)
 
             // scroll back to top of content
             const toolbarHeight = $('.nav-main').height()
@@ -49,11 +49,11 @@ export default {
         }
     },
     computed: {
-        ...mapState({
-            currentPage: state => state.blog.currentPage,
-            totalNumberOfPages: state => state.blog.totalNumberOfPages
+        ...mapState('blog', {
+            currentPage: state => state.currentPage,
+            totalNumberOfPages: state => state.totalNumberOfPages
         }),
-        ...mapGetters([
+        ...mapGetters('blog', [
             'getPostsForCurrentPage'
         ])
     },

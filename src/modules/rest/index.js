@@ -6,6 +6,9 @@ const rest = axios.create({
 })
 
 export default {
+
+    /* POSTS */
+
     fetchPostsByPage: (pageNumber) => {
         return rest.get(`/posts?page=${pageNumber}`)
         .then((res) => {
@@ -28,6 +31,31 @@ export default {
         return rest.post('/posts', {
             title: postTitle,
             content: postContent,
+            password: password
+        })
+        .then((res) => {
+            return res.data
+        })
+    },
+
+    /* PROJECTS */
+
+    fetchProjectsByPage: (pageNumber) => {
+        return rest.get(`/projects?page=${pageNumber}`)
+        .then((res) => {
+            return res.data
+        })
+    },
+    fetchProjectById: (id) => {
+        return rest.get(`/projects/${id}`)
+        .then((res) => {
+            return res.data
+        })
+    },
+    uploadProject: (projectTitle, projectContent, password) => {
+        return rest.post('/projects', {
+            title: projectTitle,
+            content: projectContent,
             password: password
         })
         .then((res) => {

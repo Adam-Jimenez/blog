@@ -4,6 +4,10 @@
         <hr />
         <el-input placeholder="Post Title" v-model="title" />
         <vue-editor class="editor" v-model="content" :editorToolbar="customToolbar"/>
+        <el-select v-model="target" placeholder="Target">
+            <el-option label="Posts" value="posts" />
+            <el-option label="Projects" value="projects" />
+        </el-select>
         <el-input type="password" class="password" placeholder="Password" v-model="password" />
         <el-button class="postButton" @click="onClick">Post</el-button>
         </div>
@@ -13,6 +17,7 @@
 
 import { VueEditor } from 'vue2-editor'
 import { mapActions } from 'vuex'
+import Promise from 'bluebird'
 
 export default {
     name: 'compose',
@@ -20,6 +25,7 @@ export default {
         return {
             title: '',
             content: '',
+            target: '', // create post or project
             password: '',
             loading: false,
             customToolbar: [
@@ -33,15 +39,29 @@ export default {
 
     },
     methods: {
-        ...mapActions([
+        ...mapActions('blog', [
             'uploadPost'
+        ]),
+        ...mapActions('projects', [
+            'uploadProject'
         ]),
         onClick () {
             this.loading = true
-            this.uploadPost({
-                title: this.title,
-                content: this.content,
-                password: this.password
+            Promise.resolve()
+            .then(() => {
+                if (this.target === 'posts') {
+                    return this.uploadPost({
+                        title: this.title,
+                        content: this.content,
+                        password: this.password
+                    })
+                } else if (this.target === 'projects') {
+                    return this.uploadProject({
+                        title: this.title,
+                        content: this.content,
+                        password: this.password
+                    })
+                }
             })
             .then(() => {
                 this.$notify.success({

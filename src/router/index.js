@@ -8,6 +8,7 @@ import Contact from '@/components/Contact'
 import Projects from '@/components/Projects'
 import Post from '@/components/Post'
 import Compose from '@/components/Compose'
+import Project from '@/components/Project'
 
 Vue.use(Router)
 
@@ -37,6 +38,11 @@ export default new Router({
         {
             path: '/projects',
             component: Projects
+        },
+        {
+            path: '/projects/:id',
+            component: Project,
+            props: true
         },
         {
             path: '/compose',
