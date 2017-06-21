@@ -9,6 +9,7 @@
 
 <script>
 import { VueEditor } from 'vue2-editor'
+import rest from '@/modules/rest'
 
 export default {
     name: 'contact',
@@ -30,13 +31,14 @@ export default {
         onClick () {
             // TODO: implement message sending mechanism
             this.loading = true
-            setTimeout(() => {
+            rest.mailAdmin('Contact from your blog', this.content)
+            .then(() => {
                 this.$notify.success({
                     message: 'Message sent successfully!',
                     duration: 2000
                 })
                 this.loading = false
-            }, 1000)
+            })
         }
     },
     computed: {

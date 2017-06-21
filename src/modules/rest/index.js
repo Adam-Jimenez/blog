@@ -61,5 +61,16 @@ export default {
         .then((res) => {
             return res.data
         })
+    },
+
+    /* CONTACT */
+
+    mailAdmin: (subject, htmlContent) => {
+        return rest.post('/contact', {
+            subject: subject,
+            content: htmlContent
+        }).then((res) => {
+            return res.data
+        })
     }
 }
