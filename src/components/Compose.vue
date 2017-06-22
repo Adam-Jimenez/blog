@@ -31,7 +31,7 @@ export default {
             customToolbar: [
                 ['bold', 'italic', 'underline'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                ['image', 'code']
+                ['image', 'code-block']
             ]
         }
     },

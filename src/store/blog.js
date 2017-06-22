@@ -104,6 +104,15 @@ export default {
             .then((post) => {
                 context.commit('setPost', post)
             })
+        },
+        uploadComment (context, payload) {
+            const postId = payload.postId
+            const content = payload.content // comment text content
+
+            return rest.uploadComment(postId, content)
+            .then((comment) => {
+                // TODO store new comment locally
+            })
         }
     }
 }

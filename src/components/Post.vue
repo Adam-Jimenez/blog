@@ -3,7 +3,9 @@
         <template v-if="post">
             <h2>{{ post.title }}</h2>
             <hr />
-            <div v-html="post.content"></div>
+            <div class="post-content" v-html="post.content"></div>
+            <hr />
+            <comment-section :postId="id" />
         </template>
     </div>
 </template>
@@ -11,6 +13,7 @@
 <script>
 
 import { mapActions } from 'vuex'
+import CommentSection from '@/components/CommentSection'
 
 export default {
     name: 'post',
@@ -37,11 +40,16 @@ export default {
         }
     },
     components: {
-
+        CommentSection
     }
 }
 </script>
 
 <style lang="scss">
-
+.post {
+    .post-content {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
 </style>

@@ -72,5 +72,16 @@ export default {
         }).then((res) => {
             return res.data
         })
+    },
+
+    /* COMMENTS */
+
+    uploadComment: (postId, content) => {
+        return rest.post(`/comments/${postId}`, {
+            content: content
+        })
+        .then((res) => {
+            return res.data
+        })
     }
 }
