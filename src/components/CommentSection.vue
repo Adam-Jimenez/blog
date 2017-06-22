@@ -1,8 +1,12 @@
 <template>
     <div class="comment-section" v-loading="loading">
         <strong>Comments</strong>
-        <div class="comment">
-            INSERT FETCHED COMMENTS HERE
+        <div class="comments">
+            <div v-for="comment in comments" class="comment">
+                <div class="author">Anonymous</div>
+                <div class="date">{{ moment(comment.created_at).fromNow() }}</div>
+                <div class="comment-content" v-html="comment.content"></div>
+            </div>
         </div>
         <vue-editor
             :editorToolbar="customToolbar"
@@ -18,6 +22,7 @@
 
 import { VueEditor } from 'vue2-editor'
 import { mapActions } from 'vuex'
+import moment from 'moment'
 
 export default {
     name: 'comment-section',
@@ -39,7 +44,8 @@ export default {
     },
     methods: {
         ...mapActions('blog', [
-            'uploadComment'
+            'uploadComment',
+            'fetchComments'
         ]),
         postComment () {
             this.loading = true
@@ -57,7 +63,22 @@ export default {
         }
     },
     computed: {
-
+        comments () {
+            const comments = this.$store.getters['blog/getCommentsForPost'](this.postId)
+            return comments
+        },
+        moment () {
+            return moment
+        }
+    },
+    mounted () {
+        if (!this.comments) {
+            this.loading = true
+            this.fetchComments(this.postId)
+            .then(() => {
+                this.loading = false
+            })
+        }
     },
     components: {
         VueEditor
@@ -67,12 +88,27 @@ export default {
 
 <style lang="scss">
 .comment-section {
-    .comment {
-        margin-top: 20px;
-        padding: 15px;
+    .comments {
+        padding: 20px;
     }
-    .new-comment-box {
-        margin-top: 40px;
+    .comment {
+        font-size: 80%;
+        margin-bottom: 20px;
+        .author {
+            font-weight: 600;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .date {
+            font-size: 80%;
+            display: inline-block;
+            color: grey;
+        }
+        .comment-content {
+            padding-top :5px;
+            padding-left: 5px;
+            word-wrap: break-word;
+        }
     }
     .postComment {
         margin-top: 5px;

@@ -13,6 +13,10 @@ export default {
          * }
          */
         pages: {},
+        /**
+         * <postId>: [comments]
+         */
+        comments: {},
         currentPage: 0,
         totalNumberOfPages: null,
         fetchedLatestPost: false
@@ -54,6 +58,13 @@ export default {
         },
         getPostsForCurrentPage: (state, getters) => {
             return getters.getPostsByPageNumber(state.currentPage)
+        },
+        getCommentsForPost: (state) => (postId) => {
+            if (!state.comments[postId]) {
+                return null
+            }
+            // TODO sort by date
+            return state.comments[postId]
         }
     },
     mutations: {
@@ -76,6 +87,15 @@ export default {
         },
         setCurrentPage (state, pageNumber) {
             state.currentPage = pageNumber
+        },
+        setComments (state, {postId, comments}) {
+            Vue.set(state.comments, postId, comments)
+        },
+        setComment (state, {postId, comment}) {
+            if (!state.comments[postId]) {
+                state.comments[postId] = []
+            }
+            state.comments[postId].push(comment)
         }
     },
     actions: {
@@ -111,7 +131,13 @@ export default {
 
             return rest.uploadComment(postId, content)
             .then((comment) => {
-                // TODO store new comment locally
+                context.commit('setComment', { postId, comment })
+            })
+        },
+        fetchComments (context, postId) {
+            return rest.fetchComments(postId)
+            .then((comments) => {
+                context.commit('setComments', { postId, comments })
             })
         }
     }

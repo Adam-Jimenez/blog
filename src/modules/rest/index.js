@@ -83,5 +83,12 @@ export default {
         .then((res) => {
             return res.data
         })
+    },
+
+    fetchComments: (postId) => {
+        return rest.get(`/posts/${postId}/comments`)
+        .then((res) => {
+            return res.data
+        })
     }
 }

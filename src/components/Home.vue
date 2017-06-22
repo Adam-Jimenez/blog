@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <div class="home" v-loading="loading">
         <h2>Latest post</h2>
         <hr />
         <post-preview v-if="latestPost"
@@ -15,6 +15,11 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'home',
+    data () {
+        return {
+            loading: false
+        }
+    },
     props: {
 
     },
@@ -33,7 +38,11 @@ export default {
     },
     mounted () {
         if (!this.latestPost) {
+            this.loading = true
             this.fetchLatestPost()
+            .then(() => {
+                this.loading = false
+            })
         }
     },
     components: {
