@@ -3,9 +3,7 @@
         <h2>Latest post</h2>
         <hr />
         <post-preview v-if="latestPost"
-            :postId="latestPost.id"
-            :title="latestPost.title"
-            :content="latestPost.content"
+            :post="latestPost"
         />
     </div>
 </template>

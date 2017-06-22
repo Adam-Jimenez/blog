@@ -5,9 +5,7 @@
         <transition-group tag="div" name="scroll" >
             <post-preview v-for="post in getPostsForCurrentPage"
                 :key="post.id"
-                :postId="post.id"
-                :title="post.title"
-                :content="post.content"
+                :post="post"
             />
         </transition-group>
         <div class="pagination-section" v-if="totalNumberOfPages">

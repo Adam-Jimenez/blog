@@ -1,33 +1,35 @@
 <template>
     <div class="post-preview">
-        <router-link :to="`/posts/${postId}`">
-            <h3>{{ title }}</h3>
-        </router-link>
-        <div class="content-preview" v-html="content"></div>
-        <router-link class="read-more" :to="`/posts/${postId}`">Read more</router-link>
+        <div class="preview-header">
+            <router-link :to="`/posts/${post.id}`">
+                <h3>{{ post.title }}</h3>
+            </router-link>
+            <div class="post-date">{{ moment(post.created_at).fromNow() }}</div>
+        </div>
+        <div class="content-preview" v-html="post.content"></div>
+        <router-link class="read-more" :to="`/posts/${post.id}`">Read more</router-link>
         <hr />
     </div>
 </template>
 
 <script>
+
+import moment from 'moment'
+
 export default {
     name: 'post-preview',
     props: {
-        postId: {
-            type: Number,
-            default: 0
-        },
-        title: {
-            type: String,
-            default: 'Post title'
-        },
-        content: {
-            type: String,
-            default: 'Post content'
+        post: {
+            required: true
         }
     },
     methods: {
 
+    },
+    computed: {
+        moment () {
+            return moment
+        }
     },
     components: {
 
@@ -39,11 +41,19 @@ export default {
 @import '../assets/css/variables';
 
 .post-preview {
-    h3 {
+    .preview-header {
         margin-bottom: 30px;
         margin-top: 30px;
-        color: #333;
     }
+    .post-date {
+        font-size: 70%;
+        color: grey;
+    }
+    h3 {
+        color: #333;
+        margin-bottom: 5px;
+    }
+
     h3:hover {
         text-decoration: underline;
     }
