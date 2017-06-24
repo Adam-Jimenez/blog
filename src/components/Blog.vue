@@ -3,7 +3,7 @@
         <h2>Blog</h2>
         <hr />
         <transition-group tag="div" name="scroll" >
-            <post-preview v-for="post in getPostsForCurrentPage"
+            <post-preview v-for="post in postsForCurrentPage"
                 :key="post.id"
                 :post="post"
             />
@@ -27,6 +27,11 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'blog',
+    data () {
+        return {
+            postsForCurrentPage: []
+        }
+    },
     props: {
 
     },
@@ -59,6 +64,11 @@ export default {
         currentPage (value) {
             if (!this.getPostsForCurrentPage) {
                 this.fetchPostsByPage(this.currentPage)
+            }
+        },
+        getPostsForCurrentPage (posts) {
+            if (posts.length > 0) {
+                this.postsForCurrentPage = posts
             }
         }
     },

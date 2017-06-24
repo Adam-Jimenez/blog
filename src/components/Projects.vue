@@ -3,7 +3,7 @@
         <h2>Projects</h2>
         <hr />
         <transition-group tag="div" name="scroll" >
-            <project-preview v-for="project in getProjectsForCurrentPage"
+            <project-preview v-for="project in projectsForCurrentPage"
                 :key="project.id"
                 :projectId="project.id"
                 :title="project.title"
@@ -29,6 +29,11 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'projects',
+    data () {
+        return {
+            projectsForCurrentPage: []
+        }
+    },
     props: {
 
     },
@@ -61,6 +66,11 @@ export default {
         currentPage (value) {
             if (!this.getProjectsForCurrentPage) {
                 this.fetchProjectsByPage(this.currentPage)
+            }
+        },
+        getProjectsForCurrentPage (projects) {
+            if (projects.length > 0) {
+                this.projectsForCurrentPage = projects
             }
         }
     },
