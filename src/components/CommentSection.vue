@@ -108,6 +108,8 @@ export default {
             padding-top :5px;
             padding-left: 5px;
             word-wrap: break-word;
+            overflow: auto;
+            max-height: 300px;
         }
     }
     .postComment {
