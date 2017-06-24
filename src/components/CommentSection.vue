@@ -2,11 +2,13 @@
     <div class="comment-section" v-loading="loading">
         <strong>Comments</strong>
         <div class="comments">
-            <div v-for="comment in comments" class="comment">
-                <div class="author">Anonymous</div>
-                <div class="date">{{ moment(comment.created_at).fromNow() }}</div>
-                <div class="comment-content" v-html="comment.content"></div>
-            </div>
+            <transition-group tag="div" name="fade" >
+                <div v-for="comment in comments" key="comment.id" class="comment">
+                    <div class="author">Anonymous</div>
+                    <div class="date">{{ moment(comment.created_at).fromNow() }}</div>
+                    <div class="comment-content" v-html="comment.content"></div>
+                </div>
+            </transition-group>
         </div>
         <vue-editor
             :editorToolbar="customToolbar"
