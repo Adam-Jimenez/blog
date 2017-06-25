@@ -1,8 +1,8 @@
 import axios from 'axios'
+import config from '@/config'
 
-// TODO: remove hardcoded url
 const rest = axios.create({
-    baseURL: 'http://localhost:3000/'
+    baseURL: config.backendUrl
 })
 
 export default {
