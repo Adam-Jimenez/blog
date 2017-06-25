@@ -42,8 +42,12 @@ export default {
             }
             // TODO: instead of sorting, just iterate and keep most recent
             const sortedPosts = getters.getOrderedPosts
-            const latestPost = sortedPosts[0]
-            return latestPost
+            if (sortedPosts) {
+                const latestPost = sortedPosts[0]
+                return latestPost
+            } else {
+                return null
+            }
         },
         getPostsByPageNumber: (state) => (pageNumber) => {
             const postIdsForPage = state.pages[pageNumber]
@@ -115,8 +119,10 @@ export default {
         fetchLatestPost (context) {
             return rest.fetchLatestPost()
             .then((post) => {
-                context.commit('setPost', post)
-                context.state.fetchedLatestPost = true
+                if (post) {
+                    context.commit('setPost', post)
+                    context.state.fetchedLatestPost = true
+                }
             })
         },
         uploadPost (context, post) {
