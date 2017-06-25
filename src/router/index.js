@@ -4,7 +4,6 @@ import Home from '@/components/Home'
 import Blog from '@/components/Blog'
 import About from '@/components/About'
 import NotFound from '@/components/NotFound'
-import Contact from '@/components/Contact'
 import Projects from '@/components/Projects'
 import Post from '@/components/Post'
 import Compose from '@/components/Compose'
@@ -31,10 +30,11 @@ export default new Router({
             path: '/about',
             component: About
         },
-        {
-            path: '/contact',
-            component: Contact
-        },
+        // TODO: fix mail sending before re-enabling route
+        // {
+        //     path: '/contact',
+        //     component: Contact
+        // },
         {
             path: '/projects',
             component: Projects

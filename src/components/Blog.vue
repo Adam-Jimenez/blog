@@ -75,6 +75,8 @@ export default {
     mounted () {
         if (!this.getPostsForCurrentPage) {
             this.fetchPostsByPage(this.currentPage)
+        } else {
+            this.postsForCurrentPage = this.getPostsForCurrentPage
         }
     },
     components: {

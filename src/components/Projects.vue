@@ -69,7 +69,7 @@ export default {
             }
         },
         getProjectsForCurrentPage (projects) {
-            if (projects.length > 0) {
+            if (projects && projects.length > 0) {
                 this.projectsForCurrentPage = projects
             }
         }
@@ -77,6 +77,8 @@ export default {
     mounted () {
         if (!this.getProjectsForCurrentPage) {
             this.fetchProjectsByPage(this.currentPage)
+        } else {
+            this.projectsForCurrentPage = this.getProjectsForCurrentPage
         }
     },
     components: {
