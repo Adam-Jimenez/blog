@@ -17,7 +17,6 @@
 
 import { VueEditor } from 'vue2-editor'
 import { mapActions } from 'vuex'
-import Promise from 'bluebird'
 
 export default {
     name: 'compose',
@@ -47,27 +46,34 @@ export default {
         ]),
         onClick () {
             this.loading = true
-            Promise.resolve()
-            .then(() => {
-                if (this.target === 'posts') {
-                    return this.uploadPost({
-                        title: this.title,
-                        content: this.content,
-                        password: this.password
-                    })
-                } else if (this.target === 'projects') {
-                    return this.uploadProject({
-                        title: this.title,
-                        content: this.content,
-                        password: this.password
-                    })
-                }
+
+            // function used for uploading
+            let upload = null
+
+            if (this.target === 'posts') {
+                upload = this.uploadPost
+            } else if (this.target === 'projects') {
+                upload = this.uploadProject
+            } else {
+                throw new Error('Invalid upload target')
+            }
+
+            return upload({
+                title: this.title,
+                content: this.content,
+                password: this.password
             })
             .then(() => {
                 this.$notify.success({
                     message: 'Posted successfully!',
                     duration: 2000
                 })
+            })
+            // no finally :(
+            .then(() => {
+                this.loading = false
+            })
+            .catch(() => {
                 this.loading = false
             })
         }

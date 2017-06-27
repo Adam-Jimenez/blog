@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import rest from '@/modules/rest'
 import _ from 'lodash'
+import { Notification } from 'element-ui'
 
 export default {
     namespaced: true,
@@ -64,18 +65,21 @@ export default {
                 context.commit('setProjects', page.data)
                 context.commit('setPage', page)
             })
+            .catch(notifyError)
         },
         fetchProjectById (context, id) {
             return rest.fetchProjectById(id)
             .then((project) => {
                 context.commit('setProject', project)
             })
+            .catch(notifyError)
         },
         uploadProject (context, project) {
             return rest.uploadProject(project.title, project.content, project.password)
             .then((project) => {
                 context.commit('setProject', project)
             })
+            .catch(notifyError)
         }
     }
 }
@@ -85,4 +89,12 @@ function sortProjectByDate (projects) {
         return new Date(project.created_at)
     }).reverse()
     return sortedProjects
+}
+
+function notifyError (err) {
+    Notification.error({
+        message: err.message,
+        duration: 2000
+    })
+    throw err
 }

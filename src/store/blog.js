@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import rest from '@/modules/rest'
 import _ from 'lodash'
+import { Notification } from 'element-ui'
 
 export default {
     namespaced: true,
@@ -109,12 +110,14 @@ export default {
                 context.commit('setPosts', page.data)
                 context.commit('setPage', page)
             })
+            .catch(notifyError)
         },
         fetchPostById (context, id) {
             return rest.fetchPostById(id)
             .then((post) => {
                 context.commit('setPost', post)
             })
+            .catch(notifyError)
         },
         fetchLatestPost (context) {
             return rest.fetchLatestPost()
@@ -124,12 +127,14 @@ export default {
                     context.state.fetchedLatestPost = true
                 }
             })
+            .catch(notifyError)
         },
         uploadPost (context, post) {
             return rest.uploadPost(post.title, post.content, post.password)
             .then((post) => {
                 context.commit('setPost', post)
             })
+            .catch(notifyError)
         },
         uploadComment (context, payload) {
             const postId = payload.postId
@@ -139,12 +144,14 @@ export default {
             .then((comment) => {
                 context.commit('setComment', { postId, comment })
             })
+            .catch(notifyError)
         },
         fetchComments (context, postId) {
             return rest.fetchComments(postId)
             .then((comments) => {
                 context.commit('setComments', { postId, comments })
             })
+            .catch(notifyError)
         }
     }
 }
@@ -154,4 +161,12 @@ function sortPostByDate (posts) {
         return new Date(post.created_at)
     }).reverse()
     return sortedPosts
+}
+
+function notifyError (err) {
+    Notification.error({
+        message: err.message,
+        duration: 2000
+    })
+    throw err
 }

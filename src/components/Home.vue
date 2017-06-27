@@ -41,6 +41,9 @@ export default {
             .then(() => {
                 this.loading = false
             })
+            .catch(() => {
+                this.loading = false
+            })
         }
     },
     components: {
