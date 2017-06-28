@@ -3,7 +3,7 @@
         <template v-if="project">
             <h2>{{ project.title }}</h2>
             <hr />
-            <div v-html="project.content"></div>
+            <div class="project-content" v-html="project.content"></div>
         </template>
     </div>
 </template>
@@ -44,4 +44,13 @@ export default {
 
 <style lang="scss">
 
+.project {
+    .project-content {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        * {
+            max-width: 100%;
+        }
+    }
+}
 </style>

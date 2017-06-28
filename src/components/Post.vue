@@ -50,6 +50,9 @@ export default {
     .post-content {
         padding-top: 10px;
         padding-bottom: 10px;
+        * {
+            max-width: 100%;
+        }
     }
 }
 </style>
