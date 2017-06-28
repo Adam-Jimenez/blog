@@ -28,7 +28,7 @@ export default {
             password: '',
             loading: false,
             customToolbar: [
-                ['bold', 'italic', 'underline'],
+                ['bold', 'italic', 'underline', 'link'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 ['image', 'code-block']
             ]
