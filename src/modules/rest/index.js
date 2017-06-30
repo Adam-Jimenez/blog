@@ -37,6 +37,16 @@ export default {
             return res.data
         })
     },
+    editPost: (postId, postTitle, postContent, password) => {
+        return rest.put(`/posts/${postId}`, {
+            title: postTitle,
+            content: postContent,
+            password: password
+        })
+        .then((res) => {
+            return res.data
+        })
+    },
 
     /* PROJECTS */
 
@@ -54,6 +64,16 @@ export default {
     },
     uploadProject: (projectTitle, projectContent, password) => {
         return rest.post('/projects', {
+            title: projectTitle,
+            content: projectContent,
+            password: password
+        })
+        .then((res) => {
+            return res.data
+        })
+    },
+    editProject: (projectId, projectTitle, projectContent, password) => {
+        return rest.put(`/projects/${projectId}`, {
             title: projectTitle,
             content: projectContent,
             password: password

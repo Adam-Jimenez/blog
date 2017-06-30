@@ -136,6 +136,13 @@ export default {
             })
             .catch(notifyError)
         },
+        editPost (context, post) {
+            return rest.editPost(post.id, post.title, post.content, post.password)
+            .then((post) => {
+                context.commit('setPost', post)
+            })
+            .catch(notifyError)
+        },
         uploadComment (context, payload) {
             const postId = payload.postId
             const content = payload.content // comment text content

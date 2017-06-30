@@ -8,6 +8,7 @@ import Projects from '@/components/Projects'
 import Post from '@/components/Post'
 import Compose from '@/components/Compose'
 import Project from '@/components/Project'
+import PostEditor from '@/components/PostEditor'
 
 Vue.use(Router)
 
@@ -24,6 +25,11 @@ export default new Router({
         {
             path: '/posts/:id',
             component: Post,
+            props: true // passes route params as props to component
+        },
+        {
+            path: '/:postType/:id/edit', //  postType is either projects or posts
+            component: PostEditor,
             props: true // passes route params as props to component
         },
         {

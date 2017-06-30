@@ -80,6 +80,13 @@ export default {
                 context.commit('setProject', project)
             })
             .catch(notifyError)
+        },
+        editProject (context, project) {
+            return rest.editProject(project.id, project.title, project.content, project.password)
+            .then((project) => {
+                context.commit('setProject', project)
+            })
+            .catch(notifyError)
         }
     }
 }
