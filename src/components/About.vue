@@ -4,7 +4,7 @@
         <img src="~@/assets/img/profile.jpg" />
         <hr />
         <p>
-            My name is Adam Jimenez, and I am a software developer passionate about making the world a better place, one line of code at the time.
+            My name is Adam Jimenez and I am a software developer passionate about making the world a better place, one line of code at the time.
         </p>
         <p>
             I've been interested in programming ever since my early teenage years when I discovered that you could make games only by typing words in the correct order.
@@ -14,7 +14,7 @@
             Since then, I've been exploring the possibilities of the programming world by working on a variety of <router-link to="/projects">projects</router-link>.
 		</p>
         <p>
-            I graduated from Cégep André-Laurendeau in Computer Science in May 2017.
+            I am currently studying at École de Technologie Supérieure (ÉTS) in Software Engineering.
         </p>
 		<div class="links">
 			<a target="_blank" href="https://github.com/Adam-Jimenez">
